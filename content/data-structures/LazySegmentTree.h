@@ -1,3 +1,14 @@
+/**
+ * Author: Lucian Bicsi
+ * Date: 2017-10-31
+ * License: CC0
+ * Source: folklore
+ * Description: Zero-indexed max-tree. Bounds are inclusive to the left and exclusive to the right.
+ * Can be changed by modifying T, f and unit.
+ * Time: O(\log N)
+ * Status: stress-tested
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef vector<int> vi;
@@ -25,13 +36,13 @@ class SegmentTree { // OOP style
         }
     }
     void propagate(int p, int L, int R) {
-        if (lazy[p] != -1) {                       // has a lazy flag
-            st[p] = lazy[p];                       // [L..R] has same value
-            if (L != R)                            // not a leaf
-                lazy[l(p)] = lazy[r(p)] = lazy[p]; // propagate downwards
-            else                                   // L == R, a single index
-                A[L] = lazy[p];                    // time to update this
-            lazy[p] = -1;                          // erase lazy flag
+        if (lazy[p] != -1) {
+            st[p] = lazy[p];
+            if (L != R)
+                lazy[l(p)] = lazy[r(p)] = lazy[p];
+            else
+                A[L] = lazy[p];
+            lazy[p] = -1;
         }
     }
     int RMQ(int p, int L, int R, int i, int j) { // O(log n)
